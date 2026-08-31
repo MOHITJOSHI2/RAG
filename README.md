@@ -1,13 +1,63 @@
-# Simple RAG pipeline using mistral LLM
+# Simple RAG Pipeline Using Mistral
 
-### Create a virtual environment to isolate the processes commands: "python3 -m venv venv" and then run "source venv/bin/activate"
+A simple RAG (Retrieval-Augmented Generation) pipeline using **Mistral, Ollama, LangChain, and ChromaDB**.
 
-### Run this command to donwload the necessary library "pip install ollama langchain_text_splitters langchain_community langchain_huggingface langchain_chroma"
+## Setup
 
-### Now simply put the ".txt" files in the rag_files folder you want the RAG to use.
+### 1. Create a virtual environment
 
-### Run the "ingestion_pipeline.py" script first using "python ingestion_pipeline.py" then wait for embedding to be made and stored.
+Create and activate a virtual environment to isolate the project's dependencies:
 
-### Then set the promt in "retrival_pipeline.py" as your wish or you can modify as input from users.
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
-### Finally run ingestion_pipeline.py
+### 2. Install dependencies
+
+Install the required Python libraries:
+
+```bash
+pip install ollama langchain-text-splitters langchain-community langchain-huggingface langchain-chroma
+```
+
+Make sure **Ollama** is installed and the Mistral model is available:
+
+```bash
+ollama pull mistral
+```
+
+### 3. Add documents
+
+Place the `.txt` files you want the RAG system to use inside the `rag_files` folder.
+
+```text
+rag_files/
+├── document1.txt
+├── document2.txt
+└── document3.txt
+```
+
+### 4. Run the ingestion pipeline
+
+Run the ingestion script first:
+
+```bash
+python ingestion_pipeline.py
+```
+
+This will load the documents, split them into chunks, create embeddings, and store them in ChromaDB.
+
+### 5. Run the retrieval pipeline
+
+Set your prompt/query inside `retrieval_pipeline.py` and then run:
+
+```bash
+python retrieval_pipeline.py
+```
+
+The retrieval pipeline will find relevant information from the stored documents and provide it as context to Mistral to generate the final answer.
+
+## Note
+
+If you add or modify documents in the `rag_files` folder, run `ingestion_pipeline.py` again before running the retrieval pipeline.
